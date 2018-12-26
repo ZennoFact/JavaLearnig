@@ -13,7 +13,7 @@ public class StudentManagementSystem {
 		
 		studentManager.showStudentsAll();
 		
-		List<Student> findStudents = studentManager.search("馬子");
+		List<Student> findStudents = studentManager.search("ﾗﾉ", SearchCategory.KANA);
 		if (findStudents.size() > 0) studentManager.show(findStudents);
 		else System.out.println("条件に一致する学生は見つかりませんでした。");
 	}

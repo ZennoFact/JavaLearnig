@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.print.attribute.standard.RequestingUserName;
+
 public class StudentManager {
 
 	private List<Student> list;
@@ -28,8 +30,19 @@ public class StudentManager {
 	}
 	
 	public List<Student> search(String keyword, SearchCategory category ) {
+		
+		
 		return list.stream()
-				.filter(s -> s.getName().matches(".*" + keyword + ".*"))
+				.filter(s -> {
+					switch (category) {
+					case ID:
+						return s.getId().matches(".*" + keyword + ".*");
+					case KANA:
+						return s.getKana().matches(".*" + keyword + ".*");
+					default:
+						return s.getName().matches(".*" + keyword + ".*");						
+					}
+				})
 				.collect(Collectors.toList());
 	}
 	
