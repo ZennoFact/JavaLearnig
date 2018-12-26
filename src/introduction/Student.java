@@ -8,6 +8,7 @@ public class Student {
 	private String mei;
 	private String sei;
 	// TODO 成績のHashMap持たせようか？？？
+	// TODO 所属するクラス，学科が必要
 	
 	@Override
 	public String toString() {
@@ -45,6 +46,10 @@ public class Student {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+	
+	public String getName() {
+		return lastName + " " + firstName;
+	}
 
 	public String getMei() {
 		return mei;
@@ -62,6 +67,7 @@ public class Student {
 		this.sei = sei;
 	}
 	
-	
-	
+	public String getKana() {
+		return sei + " " + mei;
+	}
 }
