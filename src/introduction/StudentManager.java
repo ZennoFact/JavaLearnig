@@ -1,18 +1,21 @@
 package introduction;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import javax.print.attribute.standard.RequestingUserName;
 
 public class StudentManager {
-
+	private static StudentManager manager = new StudentManager();
+	
 	private List<Student> list;
 	
-	public StudentManager() {
+	private StudentManager() {
 		list = FileLoader.loadStudentDemo();
+	}
+	
+	public static StudentManager getInstance() {
+		return manager;
 	}
 	
 	// TODO: IDの重複チェック
