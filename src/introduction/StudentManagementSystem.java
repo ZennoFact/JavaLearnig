@@ -2,7 +2,6 @@ package introduction;
 
 import java.util.List;
 import java.util.Scanner;
-import java.util.Locale.Category;
 
 public class StudentManagementSystem {
 	public static void main(String[] args) {
@@ -19,25 +18,22 @@ public class StudentManagementSystem {
 		System.out.println();
 		
 		Scanner scanner = new Scanner(System.in);
-		System.out.println("input > search_word [category_number] | exit (is close)");
-		System.out.println("[Category] 0: ID, 1: 学科, 2: 性別, 3: 学年, 4: カナ, 5: 氏名");
+		System.out.println("input > search_word [option] | exit (is close)");
 		System.out.print("> ");
-		String[] inputs = scanner.nextLine().split(" ");
+		String input = scanner.nextLine();
 		
-		while( ! inputs[0].equals("exit") ) {
-			String word = inputs[0];
-			System.out.println("[search '" + word + "']");
-			int categoryID = 5;
-			if (inputs.length > 1) categoryID = Integer.parseInt(inputs[1]);
-			List<Student> findStudents = studentManager.search(word, SearchCategory.get(categoryID));
-			if (findStudents.size() > 0) studentManager.show(findStudents);
-			else System.out.println("条件に一致する学生は見つかりませんでした。");
+		while( ! input.equals("exit") ) {
+			System.out.println("[search '" + input + "']");
+			if (input.length() > 0) {				
+				List<Student> findStudents = studentManager.search(input);
+				if (findStudents.size() > 0) studentManager.show(findStudents);
+				else System.out.println("条件に一致する学生は見つかりませんでした。");
+			}
 			
 			System.out.println();
-			System.out.println("input > search_word [category_number] | exit (is close)");
-			System.out.println("[Category] 0: ID, 1: 学科, 2: 性別, 3: 学年, 4: カナ, 5: 氏名");
+			System.out.println("input > search_word [option] | exit (is close)");
 			System.out.print("> ");
-			inputs = scanner.nextLine().split(" ");
+			input = scanner.nextLine();
 		}
 
 		System.out.println("bye.");

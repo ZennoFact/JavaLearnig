@@ -28,8 +28,18 @@ public class StudentManager {
 		else list.add(information);
 	}
 	
-	public List<Student> search(String name) {
-		return search(name, SearchCategory.NAME);
+	public List<Student> search(String text) {
+		try {
+			int year = Integer.parseInt(text);
+			return search(year, SearchCategory.GRADE);
+		} catch (NumberFormatException e) {
+			System.out.println(text.substring(text.length() - 2).equals("-d"));
+			if (text.equals("男") || text.equals("女")) return search(text, SearchCategory.GENDER);
+			else if (text.matches("[A-Z0-9]+?")) return search(text, SearchCategory.ID);
+			else if (text.matches("^[ｦ-ﾟ]*$")) return search(text, SearchCategory.KANA);
+			else if (text.substring(text.length() - 2).equals("-d")) return search(text.substring(0, text.length() -3), SearchCategory.DEPARTMENT);
+			else return search(text, SearchCategory.NAME);
+		}
 	}
 	
 	public List<Student> search(String keyword, SearchCategory category ) {
@@ -68,6 +78,7 @@ public class StudentManager {
 				.collect(Collectors.toList());
 	}
 	
+
 	public void show(Student student) {
 		System.out.println(student);
 	}

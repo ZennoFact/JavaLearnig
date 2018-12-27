@@ -1,7 +1,5 @@
 package introduction;
 
-import java.util.Locale.Category;
-
 public enum SearchCategory {
 	ID(0),
 	DEPARTMENT(1),
