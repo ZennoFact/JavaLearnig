@@ -33,17 +33,36 @@ public class StudentManager {
 	}
 	
 	public List<Student> search(String keyword, SearchCategory category ) {
-		
-		
 		return list.stream()
 				.filter(s -> {
 					switch (category) {
 					case ID:
 						return s.getId().matches(".*" + keyword + ".*");
+					case DEPARTMENT:
+						return s.getDepartment().toString().matches(".*" + keyword + ".*");
+					case GENDER:
+						return s.getGender().toString().equals(keyword);
+					case GRADE:
+						// GUIを作り始めると必要
+						return s.getGrade() == Integer.parseInt(keyword);
 					case KANA:
 						return s.getKana().matches(".*" + keyword + ".*");
 					default:
 						return s.getName().matches(".*" + keyword + ".*");						
+					}
+				})
+				.collect(Collectors.toList());
+	}
+	
+	public List<Student> search(int year, SearchCategory category ) {
+		return list.stream()
+				.filter(s -> {
+					switch (category) {
+					case GRADE:
+						return s.getGrade() == year;
+					default:
+						// TODO: そのうち，入学年とかで検索できるようにする
+						return s.getGrade() == year;
 					}
 				})
 				.collect(Collectors.toList());

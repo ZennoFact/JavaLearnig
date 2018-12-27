@@ -7,20 +7,35 @@ public class Student {
 	private String lastName;
 	private String mei;
 	private String sei;
+	private Gender gender;
+	private Department department;
+	private int grade;
+	
 	// TODO 成績のHashMap持たせようか？？？
-	// TODO 所属するクラス，学科が必要
 	
 	@Override
 	public String toString() {
-		return id + " " + lastName + " " + firstName + "(" + sei + " " + mei + ")";
+		return id + " " + lastName + " " + firstName + "[" + sei + " " + mei + "](" + gender +") | " + getDepartment() + " " + getGrade() + "年生";
 	}
 	
-	public Student(String id, String lastName, String firstName, String sei, String mei) {
+	public Student(String id, String lastName, String firstName, String sei, String mei, Gender gender) {
+		this(id, lastName, firstName, sei, mei, gender, Department.UNASSIGNED, 0);
+	}
+	
+	public Student(String id, String lastName, String firstName, String sei, String mei, Gender gender, Department department, int grade) {
 		this.setId(id);
 		this.setFirstName(firstName);
 		this.setLastName(lastName);
 		this.setMei(mei);
 		this.setSei(sei);
+		this.setGender(gender);
+		this.setDepartment(department);
+		this.setGrade(grade);
+	}
+	
+	public void placement(Department department, int grade) {
+		this.setDepartment(department);
+		this.setGrade(grade);
 	}
 
 	public String getId() {
@@ -69,5 +84,29 @@ public class Student {
 	
 	public String getKana() {
 		return sei + " " + mei;
+	}
+
+	public Gender getGender() {
+		return gender;
+	}
+
+	public void setGender(Gender gender) {
+		this.gender = gender;
+	}
+
+	public Department getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(Department department) {
+		this.department = department;
+	}
+
+	public int getGrade() {
+		return grade;
+	}
+
+	public void setGrade(int grade) {
+		this.grade = grade;
 	}
 }
