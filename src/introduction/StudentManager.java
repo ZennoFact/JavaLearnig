@@ -1,7 +1,7 @@
 package introduction;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -11,22 +11,40 @@ public class StudentManager {
 	private List<Student> list;
 	
 	private StudentManager() {
-		list = FileLoader.loadStudentDemo();
+		list = new ArrayList<>();
+	}
+	
+	public void loadData(String mode) {
+		switch (mode) {
+		case "demo":
+			FileLoader.loadStudentDemo(manager);			
+			break;
+		default:
+			list = new ArrayList<>();
+			break;
+		}
 	}
 	
 	public static StudentManager getInstance() {
 		return manager;
 	}
 	
-	// TODO: IDの重複チェック
 	public void register(Student information) {
-		Optional<Student> alreadyRegistered = list.stream()
-				.filter(s -> s.getId().equals(information.getId()) )
-				.findFirst();
+		List<Student> registeredStudents = list.stream()
+				.filter(s -> s.getEnteringYear() == information.getEnteringYear() && s.getDepartment() == information.getDepartment() )
+				.collect(Collectors.toList());
 		
-		if(alreadyRegistered.isPresent()) System.out.println("学生の登録に失敗しました。");
-		else list.add(information);
+		information.setId(createId(information, registeredStudents.size()));
+		list.add(information);
 	}
+	
+	private String createId(Student student, int number) {
+		return student.getDepartment().getSchool().getId() +
+				(student.getEnteringYear() % 100) +
+				student.getDepartment().getBits() +
+				String.format("%03d", (number + 1));
+	}
+	
 	
 	public List<Student> search(String text) {
 		try {

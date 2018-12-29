@@ -7,9 +7,10 @@ public class StudentManagementSystem {
 	public static void main(String[] args) {
 
 		StudentManager studentManager = StudentManager.getInstance();
-	
+		studentManager.loadData("demo");
+		
 		// TODO　学科込みで追加したら，自動でID
-		Student transfer = new Student("E16C2002", "中臣", "鎌足", "ﾅｶﾄﾐﾉ", "ｶﾏﾀﾘ", Gender.MALE);
+		Student transfer = new Student(2016, "中臣", "鎌足", "ﾅｶﾄﾐﾉ", "ｶﾏﾀﾘ", Gender.MALE);
 		transfer.placement(Department.MULTIMEDIA_COMPUTING, 3);
 		studentManager.register(transfer);
 		

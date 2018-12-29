@@ -10,6 +10,7 @@ public class Student {
 	private Gender gender;
 	private Department department;
 	private int grade;
+	private int enteringYear;
 	
 	// TODO 成績のHashMap持たせようか？？？
 	
@@ -18,12 +19,12 @@ public class Student {
 		return id + " " + lastName + " " + firstName + "[" + sei + " " + mei + "](" + gender +") | " + getDepartment() + " " + getGrade() + "年生";
 	}
 	
-	public Student(String id, String lastName, String firstName, String sei, String mei, Gender gender) {
-		this(id, lastName, firstName, sei, mei, gender, Department.UNASSIGNED, 0);
+	public Student(int entringYear, String lastName, String firstName, String sei, String mei, Gender gender) {
+		this(entringYear, lastName, firstName, sei, mei, gender, Department.UNASSIGNED, 0);
 	}
 	
-	public Student(String id, String lastName, String firstName, String sei, String mei, Gender gender, Department department, int grade) {
-		this.setId(id);
+	public Student(int entringYear, String lastName, String firstName, String sei, String mei, Gender gender, Department department, int grade) {
+		this.setEnteringYear(entringYear);
 		this.setFirstName(firstName);
 		this.setLastName(lastName);
 		this.setMei(mei);
@@ -108,5 +109,13 @@ public class Student {
 
 	public void setGrade(int grade) {
 		this.grade = grade;
+	}
+
+	public int getEnteringYear() {
+		return enteringYear;
+	}
+
+	public void setEnteringYear(int enteringYear) {
+		this.enteringYear = enteringYear;
 	}
 }
